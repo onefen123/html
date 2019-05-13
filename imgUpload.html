@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片上传样式</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<div class="up_imgs" style="width: 150px;height: 100px;position: relative;">
+    <input type="file" style="width: 10px" class="up_img" accept="image/png,image/jpeg,image/gif,image/jpg,,image/nmp">
+    <div class="up_text" onclick="up_img(this)" style="position:absolute;width: 150px;height: 100px;top: 0;left: 0;border: 1px dashed darkgray;background: #f8f8f8;text-align: center;cursor: pointer">
+        <div style="font-size: 52px;line-height: 70px">+</div>
+        <div>点击上传</div>
+        <img src="1.png" style="position: absolute;top: 0;left: 0;width: 148px;height: 98px">
+    </div>
+</div>
+</body>
+<script>
+    function up_img(o){
+        $(o).parent().children('input').click();
+        $(o).parent().children('input').change(function(){
+            var files=$(this)[0].files[0];
+            if(files) {
+                var reader=new FileReader();
+                reader.onload=function(evt){
+                    $(o).children('img').attr('src',evt.target.result);
+
+                }
+                reader.readAsDataURL(files);
+            } else{
+                alert("上传失败");
+            }
+        });
+    }
+</script>
+</html>
